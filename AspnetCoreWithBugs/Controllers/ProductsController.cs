@@ -34,6 +34,9 @@ namespace AspnetCoreWithBugs.Controllers
             if (ModelState.IsValid)
             {
                 await _context.AddAsync(product);
+
+                await _context.SaveChangesAsync(); // Insert query from above was not being run
+
                 return RedirectToAction(nameof(Index));
             }
             return View(product);

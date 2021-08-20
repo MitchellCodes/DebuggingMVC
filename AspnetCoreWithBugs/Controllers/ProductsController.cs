@@ -83,6 +83,9 @@ namespace AspnetCoreWithBugs.Controllers
         {
             var product = await _context.Product.FindAsync(id);
             _context.Product.Remove(product);
+
+            await _context.SaveChangesAsync(); // Delete query from above was not executed
+
             return RedirectToAction(nameof(Index));
         }
 
